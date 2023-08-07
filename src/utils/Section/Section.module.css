@@ -1,0 +1,19 @@
+.section {
+   
+    margin: 0;
+    
+}
+
+.title {
+    margin-top: 0;
+    display: block;
+    border-bottom: 2px solid #232323;
+    font-weight: 500;
+    
+}
+
+
+.container {
+    background-color: azure;
+    padding: 24px;
+}
