@@ -19,7 +19,7 @@ class App extends Component {
         ? {
             contacts: [
               ...pervState.contacts,
-              { id: nanoid(), name: pervState.name },
+              { id: nanoid(), name: pervState.name, number: pervState.number },
             ],
           }
         : { contacts: [...pervState.contacts] };
@@ -28,7 +28,10 @@ class App extends Component {
   };
 
   inputHandler = event => {
-    this.setState({ name: event.target.value });
+
+    const key = event.target.name;
+    const val = event.target.value;
+    this.setState({ [key]: val });
   };
 
   render() {
@@ -41,6 +44,7 @@ class App extends Component {
             fnSubmit={this.formHandlerSubmit}
             fnInput={this.inputHandler}
             nameValue={this.state.name}
+            telValue={this.state.number}
           />
         </Section>
         <Section title="Contacts">
