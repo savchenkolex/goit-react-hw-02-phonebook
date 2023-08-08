@@ -6,9 +6,16 @@
     gap: 24px;
 }
 
+.fieldsbox {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 14px;
+}
+
 .label {
-    display: inline-flex;
-    gap: 24px;
+    display: flex;
+    gap: 8px;
 }
 
 button {

@@ -13,24 +13,15 @@ class App extends Component {
 
   formHandlerSubmit = event => {
     event.preventDefault();
-    console.log(event);
     this.setState(pervState => {
-      if (pervState.contacts.length) {
-        console.log(pervState.contacts.length);
-        console.log("lsdj;kfa");
-      } else {
-        const contactArr = [
-          {
-            id: nanoid(),
-            name: pervState.name,
-          },
-        ]
-
-        this.setState({
-          contacts: contactArr,
-        });
-      }
-      
+      return this.state.contacts
+        ? {
+            contacts: [
+              ...pervState.contacts,
+              { id: nanoid(), name: pervState.name },
+            ],
+          }
+        : { contacts: [...pervState.contacts] };
     });
   };
 
@@ -47,10 +38,11 @@ class App extends Component {
           <BaseForm
             fnSubmit={this.formHandlerSubmit}
             fnInput={this.inputHandler}
+            nameValue={this.state.name}
           />
         </Section>
         <Section title="Contacts">
-          <ListContacts />
+          <ListContacts contacts={this.state.contacts} />
         </Section>
       </>
     );

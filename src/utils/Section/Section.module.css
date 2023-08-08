@@ -1,4 +1,5 @@
 .section {
+    background-color: azure;
    
     margin: 0;
     
@@ -14,6 +15,6 @@
 
 
 .container {
-    background-color: azure;
     padding: 24px;
+    max-width: 500px;
 }
