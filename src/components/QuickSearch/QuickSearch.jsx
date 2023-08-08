@@ -6,7 +6,7 @@ export default function QuickSearch (props) {
             <label>
                 <span>Quick search: </span>
             <input type="text" name="filter" onChange={event => {
-                console.log(event);
+                props.fnInput(event);
             }} />
             </label>
         </form>

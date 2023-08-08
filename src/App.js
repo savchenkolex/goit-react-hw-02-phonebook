@@ -41,11 +41,19 @@ class App extends Component {
     this.setState({ [key]: val });
   };
 
+  filterFn = () => {
+    const contacts = this.state.contacts;
+    return contacts.filter(({name}) => {
+      
+      return name.toLowerCase().includes(this.state.filter.toLowerCase());
+    })
+  }
+
   render() {
     return (
       <>
         <HeaderSection />
-        {console.log(this.state)}
+        {/* {console.log(this.state)} */}
         <Section title="Add New Contact">
           <BaseForm
             fnSubmit={this.formHandlerSubmit}
@@ -55,8 +63,8 @@ class App extends Component {
           />
         </Section>
         <Section title="Contacts">
-          <QuickSearch />
-          <ListContacts contacts={this.state.contacts} />
+          <QuickSearch fnInput={this.inputHandler} />
+          <ListContacts contacts={this.filterFn()}  />
         </Section>
       </>
     );
