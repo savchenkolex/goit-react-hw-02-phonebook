@@ -19,6 +19,15 @@ class App extends Component {
 
   formHandlerSubmit = (event, data) => {
     event.preventDefault();
+    const contacts = this.state.contacts;
+    const isExists = contacts.some(({name}) => {
+      return (name === data.name);
+      })
+      if(isExists) {
+        alert(`Looks like ${data.name} is already in contacts.`);
+        console.log(isExists);
+        return
+      }
     this.setState(pervState => {
       return this.state.contacts
         ? {
