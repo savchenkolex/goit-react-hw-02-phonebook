@@ -54,6 +54,17 @@ class App extends Component {
     });
   };
 
+  deleteContact = (event) => {
+    
+    const currentId = event.target.dataset.id;
+    const contacts = this.state.contacts;
+    const contactsClear = contacts.filter((item)=>{
+      return (item.id !== currentId);
+    })
+    
+    this.setState({contacts: contactsClear});
+  }
+
   render() {
     return (
       <>
@@ -63,7 +74,7 @@ class App extends Component {
         </Section>
         <Section title="Contacts">
           <QuickSearch fnInput={this.inputHandler} />
-          <ListContacts contacts={this.filterFn()} />
+          <ListContacts contacts={this.filterFn()} deleteContact={this.deleteContact}  />
         </Section>
       </>
     );

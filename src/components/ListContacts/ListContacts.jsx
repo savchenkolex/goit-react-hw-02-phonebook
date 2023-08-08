@@ -7,7 +7,7 @@ class ListContacts extends Component {
         return (
             <ol className={css.listBox}>
                 {this.props.contacts.map(item => {
-                   return <li className={css["list-item"]} key={item.id}>{item.name}: {item.number}</li>;
+                   return <li className={css["list-item"]} key={item.id}><span>{item.name}:</span> <span>{item.number}</span><button data-id={item.id} type="button" onClick={(event)=>{this.props.deleteContact(event)}}>Del</button></li>;
                 })}
             </ol>
         )
