@@ -9,6 +9,7 @@ class App extends Component {
   state = {
     contacts: [],
     name: '',
+    number: '',
   };
 
   formHandlerSubmit = event => {
@@ -23,6 +24,7 @@ class App extends Component {
           }
         : { contacts: [...pervState.contacts] };
     });
+    this.setState({name:'', number:'' })
   };
 
   inputHandler = event => {
@@ -34,7 +36,7 @@ class App extends Component {
       <>
         <HeaderSection />
         {console.log(this.state)}
-        <Section title="">
+        <Section title="Add New Contact">
           <BaseForm
             fnSubmit={this.formHandlerSubmit}
             fnInput={this.inputHandler}
