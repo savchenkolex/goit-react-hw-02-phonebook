@@ -1,45 +1,61 @@
+import React, {Component} from 'react';
 import css from './BaseForm.module.css';
 
-export default function BaseForm(props) {
-  return (
-    <form
-      className={css.form}
-      onSubmit={event => {
-        props.fnSubmit(event);
-      }}
-    >
-      <div className={css.fieldsbox}>
-        <label className={css.label}>
-          {/* {console.log(props)} */}
-          <span>Name:</span>
-          <input
-            type="text"
-            name="name"
-            pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-            title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-            required
-            onChange={event => {
-              props.fnInput(event);
-            }}
-            value={props.nameValue}
-          />
-        </label>
-        <label className={css.label}>
-        <span>Tel:</span>
-          <input
-            type="tel"
-            name="number"
-            pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-            title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
-            required
-            onChange={event => {
-                props.fnInput(event);
-              }}
-              value={props.telValue}
-          />
-        </label>
-      </div>
-      <button type="submit">Add Contact</button>
-    </form>
-  );
+export default class BaseForm extends Component {
+    state = {
+        name: '',
+        number: '',
+    }
+
+    inputHandler = event => {
+
+        const key = event.target.name;
+        const val = event.target.value;
+        this.setState({ [key]: val });
+      };
+
+  render() {
+    return   (
+        <form
+          className={css.form}
+          onSubmit={event => {
+            this.props.fnSubmit(event, this.state);
+            this.setState({ name: '', number: '' });
+          }}
+        >
+          <div className={css.fieldsbox}>
+            <label className={css.label}>
+            
+              <span>Name:</span>
+              <input
+                type="text"
+                name="name"
+                pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+                title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
+                required
+                onChange={event => {
+                  this.inputHandler(event);
+                }}
+                value={this.state.name}
+              />
+            </label>
+            <label className={css.label}>
+            <span>Tel:</span>
+              <input
+                type="tel"
+                name="number"
+                pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+                title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
+                required
+                onChange={event => {
+                    this.inputHandler(event);
+                  }}
+                  value={this.state.number}
+              />
+            </label>
+          </div>
+          <button type="submit">Add Contact</button>
+        </form>
+      );
+  }
 }

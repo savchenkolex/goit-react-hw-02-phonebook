@@ -9,33 +9,30 @@ import QuickSearch from './components/QuickSearch/QuickSearch';
 class App extends Component {
   state = {
     contacts: [
-      {id: 'id-1', name: 'Rosie Simpson', number: '459-12-56'},
-      {id: 'id-2', name: 'Hermione Kline', number: '443-89-12'},
-      {id: 'id-3', name: 'Eden Clements', number: '645-17-79'},
-      {id: 'id-4', name: 'Annie Copeland', number: '227-91-26'},
+      { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
+      { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
+      { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
+      { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
     ],
-    filter:'',
-    name: '',
-    number: '',
+    filter: '',
   };
 
-  formHandlerSubmit = event => {
+  formHandlerSubmit = (event, data) => {
     event.preventDefault();
     this.setState(pervState => {
       return this.state.contacts
         ? {
             contacts: [
               ...pervState.contacts,
-              { id: nanoid(), name: pervState.name, number: pervState.number },
+              { id: nanoid(), name: data.name, number: data.number },
             ],
           }
         : { contacts: [...pervState.contacts] };
     });
-    this.setState({name:'', number:'' })
+    
   };
 
   inputHandler = event => {
-
     const key = event.target.name;
     const val = event.target.value;
     this.setState({ [key]: val });
@@ -43,28 +40,21 @@ class App extends Component {
 
   filterFn = () => {
     const contacts = this.state.contacts;
-    return contacts.filter(({name}) => {
-      
+    return contacts.filter(({ name }) => {
       return name.toLowerCase().includes(this.state.filter.toLowerCase());
-    })
-  }
+    });
+  };
 
   render() {
     return (
       <>
         <HeaderSection />
-        {/* {console.log(this.state)} */}
         <Section title="Add New Contact">
-          <BaseForm
-            fnSubmit={this.formHandlerSubmit}
-            fnInput={this.inputHandler}
-            nameValue={this.state.name}
-            telValue={this.state.number}
-          />
+          <BaseForm fnSubmit={this.formHandlerSubmit} />
         </Section>
         <Section title="Contacts">
           <QuickSearch fnInput={this.inputHandler} />
-          <ListContacts contacts={this.filterFn()}  />
+          <ListContacts contacts={this.filterFn()} />
         </Section>
       </>
     );
