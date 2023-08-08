@@ -1,4 +1,5 @@
 import css from './Section.module.css';
+import PropTypes from "prop-types";
 
 export default function Section(props) {
   return (
@@ -9,4 +10,8 @@ export default function Section(props) {
       </div>
     </section>
   );
+}
+
+Section.propTypes = {
+  title: PropTypes.string,
 }

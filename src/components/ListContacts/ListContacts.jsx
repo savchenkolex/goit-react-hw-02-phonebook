@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import PropTypes, {shape} from "prop-types";
 import css from "./ListContacts.module.css";
 
 class ListContacts extends Component {
@@ -12,6 +13,14 @@ class ListContacts extends Component {
             </ol>
         )
     }
+}
+
+ListContacts.propTypes = {
+    contacts: PropTypes.arrayOf( shape({
+        id: PropTypes.string,
+        name: PropTypes.string,
+        number: PropTypes.string,
+    })),
 }
 
 export default ListContacts;

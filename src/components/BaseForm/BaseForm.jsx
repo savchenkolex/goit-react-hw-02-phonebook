@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import PropTypes from "prop-types";
 import css from './BaseForm.module.css';
 
 export default class BaseForm extends Component {
@@ -58,4 +59,8 @@ export default class BaseForm extends Component {
         </form>
       );
   }
+}
+
+BaseForm.propTypes = {
+    fnSubmit: PropTypes.func,
 }

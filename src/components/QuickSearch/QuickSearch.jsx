@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import css from './QuickSearch.module.css';
 
 export default function QuickSearch(props) {
@@ -14,4 +15,8 @@ export default function QuickSearch(props) {
         />
     </form>
   );
+}
+
+QuickSearch.propTypes = {
+  fnInput: PropTypes.func,
 }
