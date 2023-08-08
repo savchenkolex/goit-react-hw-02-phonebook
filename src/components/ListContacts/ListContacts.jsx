@@ -6,7 +6,7 @@ class ListContacts extends Component {
         return (
             <ol className={css.listBox}>
                 {this.props.contacts.map(item => {
-                   return <li key={item.id}>{item.name}: {item.number}</li>;
+                   return <li className={css["list-item"]} key={item.id}>{item.name}: {item.number}</li>;
                 })}
             </ol>
         )

@@ -3,3 +3,7 @@
     height: 50vh;
 }
 
+.list-item {
+    border-bottom: 1px dotted #232323;
+    margin-bottom: 8px;
+}
