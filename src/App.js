@@ -4,6 +4,7 @@ import BaseForm from './components/BaseForm/BaseForm';
 import Section from './utils/Section/Section';
 import HeaderSection from './components/HeaderSection/HeaderSection';
 import ListContacts from './components/ListContacts/ListContacts';
+import QuickSearch from './components/QuickSearch/QuickSearch';
 
 class App extends Component {
   state = {
@@ -53,10 +54,8 @@ class App extends Component {
             telValue={this.state.number}
           />
         </Section>
-        <Section title="Quick Search by name:">
-          
-        </Section>
         <Section title="Contacts">
+          <QuickSearch />
           <ListContacts contacts={this.state.contacts} />
         </Section>
       </>

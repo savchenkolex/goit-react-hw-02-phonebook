@@ -1,5 +1,5 @@
 .form {
-    border-left: 2px solid #232323;
+    /* border-left: 2px solid #232323; */
     padding: 10px 10px 0 10px;
     display: flex;
     flex-direction: column;
