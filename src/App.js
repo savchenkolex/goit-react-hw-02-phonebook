@@ -17,34 +17,25 @@ class App extends Component {
     filter: '',
   };
 
-  formHandlerSubmit = (event, data) => {
-    event.preventDefault();
+  addContact = data => {
     const contacts = this.state.contacts;
-    const isExists = contacts.some(({name}) => {
-      return (name === data.name);
-      })
-      if(isExists) {
-        alert(`Looks like ${data.name} is already in contacts.`);
-        console.log(isExists);
-        return
-      }
-    this.setState(pervState => {
-      return this.state.contacts
-        ? {
-            contacts: [
-              ...pervState.contacts,
-              { id: nanoid(), name: data.name, number: data.number },
-            ],
-          }
-        : { contacts: [...pervState.contacts] };
+    const isExists = contacts.some(({ name }) => {
+      return name === data.name;
     });
-    
-  };
+    if (isExists) {
+      alert(`Looks like ${data.name} is already in contacts.`);
 
-  inputHandler = event => {
-    const key = event.target.name;
-    const val = event.target.value;
-    this.setState({ [key]: val });
+      return;
+    }
+
+    this.setState(pervState => {
+      return {
+        contacts: [
+          ...pervState.contacts,
+          { id: nanoid(), name: data.name, number: data.number },
+        ],
+      };
+    });
   };
 
   filterFn = () => {
@@ -54,27 +45,29 @@ class App extends Component {
     });
   };
 
-  deleteContact = (event) => {
-    
-    const currentId = event.target.dataset.id;
-    const contacts = this.state.contacts;
-    const contactsClear = contacts.filter((item)=>{
-      return (item.id !== currentId);
-    })
-    
-    this.setState({contacts: contactsClear});
-  }
+  deleteContact = id => {
+    this.setState(pervState => {
+      return {
+        contacts: pervState.contacts.filter(item => {
+          return item.id !== id;
+        }),
+      };
+    });
+  };
 
   render() {
     return (
       <>
         <HeaderSection />
         <Section title="Add New Contact">
-          <BaseForm fnSubmit={this.formHandlerSubmit} />
+          <BaseForm addContact={this.addContact} />
         </Section>
         <Section title="Contacts">
           <QuickSearch fnInput={this.inputHandler} />
-          <ListContacts contacts={this.filterFn()} deleteContact={this.deleteContact}  />
+          <ListContacts
+            contacts={this.filterFn()}
+            deleteContact={this.deleteContact}
+          />
         </Section>
       </>
     );
